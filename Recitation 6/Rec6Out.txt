@@ -1,0 +1,19 @@
+Waldner was found in the list
+Guoliang was found in the list
+Yaping was found in the list
+Hong was found in the list
+Yue was found in the list
+Xin was found in the list
+Liqin was found in the list
+Long was found in the list
+
+Seemiller was not found in the list
+
+Removing at index 5: Yue
+Removing at index 4: Hong
+Removing at index 4: Xin
+Removing at index 3: Yaping
+Removing at index 3: Liqin
+Removing at index 2: Guoliang
+Removing at index 2: Long
+Removing at index 1: Waldner

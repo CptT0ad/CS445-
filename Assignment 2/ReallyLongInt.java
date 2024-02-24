@@ -4,6 +4,8 @@
 // to work, you must complete the implementation of the LinkedListPlus class.
 // See additional comments below.
 
+import A2LList.Node;
+
 public class ReallyLongInt 	extends LinkedListPlus<Integer> 
 							implements Comparable<ReallyLongInt>
 {
@@ -59,13 +61,42 @@ public class ReallyLongInt 	extends LinkedListPlus<Integer>
 	// extract digits from the long value.
 	public ReallyLongInt(long X)
 	{
+		super();
+		
+		if(X == 0)
+		{
+			
+			this.add(1, Integer.valueOf(0));
+		}
+		else
+		
+		while(X > 0)
+		{
+		int tempValue = (int) X % 10;
+		this.add(1, Integer.valueOf(tempValue));
+		
+		X = X / 10;
+		}
+
 	}
+	
 	
 	// Method to put digits of number into a String.  Note that toString()
 	// has already been written for LinkedListPlus, but you need to
 	// override it to show the numbers in the way they should appear.
 	public String toString()
 	{
+		StringBuilder b = new StringBuilder();
+		Node curr = this.firstNode.prev;
+		int i = 0;
+		while (i < this.getLength())
+		{
+			b.append(curr.data.toString());
+			b.append("");
+			curr = curr.prev;
+			i++;
+		}
+		return b.toString();
 	}
 
 	// See notes in the Assignment sheet for the methods below.  Be sure to
@@ -75,13 +106,89 @@ public class ReallyLongInt 	extends LinkedListPlus<Integer>
 	// Return new ReallyLongInt which is sum of current and argument
 	public ReallyLongInt add(ReallyLongInt rightOp)
 	{
+		int l1Length = this.numberOfEntries;
+		int l2Length = rightOp.numberOfEntries;
+		ReallyLongInt sum = new ReallyLongInt();
+		
+		
+		
+		if(l1Length > l2Length)
+		{
+			while(l1Length != l2Length)
+			{
+				this.add(0);
+			}
+			
+		}
+		else if(l1Length < l2Length)
+		{
+			while(l2Length != l1Length)
+			{
+				rightOp.add(0);
+			}
+			
+		} //sets up ReallyBigInts to have the same amount of digits
+		
+		Node Node1 = this.firstNode.prev;
+		Node Node2 = rightOp.firstNode.prev;
+		Integer tempValue = null;
+		Integer remainder = null;
+		
+		//special case - first two values, wont ever have a chance of having a remainder
+		tempValue = Node1.data + Node2.data;
+				
+				if(tempValue > 9)
+				{
+					tempValue = tempValue % 9;
+					remainder = remainder((Integer)Node1.data, (Integer) Node2.data);
+				}
+				
+				sum.add(tempValue);
+		
+		for(int i = 1; i < l1Length; i++)
+		{
+		Node1 = Node1.prev;
+		Node2 = Node2.prev;
+		
+		tempValue = Node1.data + Node2.data + remainder;
+		
+		if(tempValue > 9)
+		{
+			tempValue = tempValue % 9;
+			remainder = remainder((Integer)Node1.data, (Integer) Node2.data);
+		}
+		
+			sum.add(tempValue);	
+		}
+		
+		if(remainder != 0) //case when there is a remainder at the end of adding
+		{
+			sum.add(remainder);
+		}
+		
+		if(sum.firstNode.data == 0)
+		{
+			while(firstNode.data == 0)
+			{
+				sum.leftShift(1);
+			}
+			
+		}
+		return sum;
 	}
 	
 	// Return new ReallyLongInt which is difference of current and argument
 	public ReallyLongInt subtract(ReallyLongInt rightOp)
 	{	
 	}
-
+	
+	public Integer remainder(Integer num1, Integer num2) //if digit in adding goes above 9 to deal with single digits
+	{
+		return (num1 + num2) % 9;
+		
+	}
+	
+	
 	// Return new ReallyLongInt which is product of current and argument
 	public ReallyLongInt multiply(ReallyLongInt rightOp)
 	{

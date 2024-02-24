@@ -4,7 +4,7 @@
 // to work, you must complete the implementation of the LinkedListPlus class.
 // See additional comments below.
 
-import A2LList.Node;
+
 
 public class ReallyLongInt 	extends LinkedListPlus<Integer> 
 							implements Comparable<ReallyLongInt>
@@ -63,10 +63,11 @@ public class ReallyLongInt 	extends LinkedListPlus<Integer>
 	{
 		super();
 		
+		
 		if(X == 0)
 		{
 			
-			this.add(1, Integer.valueOf(0));
+			this.add(1,0);
 		}
 		else
 		
@@ -109,37 +110,46 @@ public class ReallyLongInt 	extends LinkedListPlus<Integer>
 		int l1Length = this.numberOfEntries;
 		int l2Length = rightOp.numberOfEntries;
 		ReallyLongInt sum = new ReallyLongInt();
+		boolean biggerNum = false; // false means the first number is bigger
+		
 		
 		
 		
 		if(l1Length > l2Length)
 		{
-			while(l1Length != l2Length)
+			while(l1Length < l2Length)
 			{
-				this.add(0);
+				this.add(1,0);
+				l1Length++;
 			}
 			
 		}
-		else if(l1Length < l2Length)
+		else
 		{
-			while(l2Length != l1Length)
+			biggerNum = true;
+			while(l2Length < l1Length)
 			{
-				rightOp.add(0);
+				rightOp.add(1,0);
+				l2Length++;
 			}
 			
 		} //sets up ReallyBigInts to have the same amount of digits
 		
+		
+		
 		Node Node1 = this.firstNode.prev;
 		Node Node2 = rightOp.firstNode.prev;
 		Integer tempValue = null;
-		Integer remainder = null;
+		Integer remainder = 0;
+		
+		
 		
 		//special case - first two values, wont ever have a chance of having a remainder
 		tempValue = Node1.data + Node2.data;
 				
-				if(tempValue > 9)
+				if(tempValue > 10)
 				{
-					tempValue = tempValue % 9;
+					tempValue = tempValue % 10;
 					remainder = remainder((Integer)Node1.data, (Integer) Node2.data);
 				}
 				
@@ -161,20 +171,27 @@ public class ReallyLongInt 	extends LinkedListPlus<Integer>
 			sum.add(tempValue);	
 		}
 		
-		if(remainder != 0) //case when there is a remainder at the end of adding
-		{
-			sum.add(remainder);
-		}
 		
-		if(sum.firstNode.data == 0)
+			sum.add(remainder);
+		
+		
+		Node sumLastNode = sum.firstNode.prev;
+		if(sumLastNode.data == 0)
 		{
-			while(firstNode.data == 0)
+			while(sumLastNode.data == 0)
 			{
-				sum.leftShift(1);
+				sum.rightShift(1);
+				sumLastNode = sum.firstNode.prev;
 			}
 			
 		}
 		return sum;
+		}
+		
+	public Integer remainder(Integer num1, Integer num2) //if digit in adding goes above 9 to deal with single digits
+	{
+		return (num1 + num2) % 10;
+		
 	}
 	
 	// Return new ReallyLongInt which is difference of current and argument
@@ -182,11 +199,7 @@ public class ReallyLongInt 	extends LinkedListPlus<Integer>
 	{	
 	}
 	
-	public Integer remainder(Integer num1, Integer num2) //if digit in adding goes above 9 to deal with single digits
-	{
-		return (num1 + num2) % 9;
-		
-	}
+	
 	
 	
 	// Return new ReallyLongInt which is product of current and argument

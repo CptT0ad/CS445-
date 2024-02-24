@@ -113,5 +113,20 @@ public class DoubleRecList
 	
 	// Method to reverse the data in the list.
 	// You must implement this method.  See comments in the exercise document.
-	//public void reverse()
+	public void reverse()
+	{
+		Node newList = front.getPrevNode();
+		Node nextNode = newList.getPrevNode();
+		front = null;
+		
+	}
+	
+	public void reverseRecursive(Node nextNode, Node newList)
+	{
+		
+		if(nextNode.getPrevNode() == null)
+		{
+			nextNode.setPrevNode();
+		}
+	}
 }

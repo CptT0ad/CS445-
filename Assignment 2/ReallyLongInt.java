@@ -74,7 +74,7 @@ public class ReallyLongInt 	extends LinkedListPlus<Integer>
 		while(X > 0)
 		{
 		int tempValue = (int) X % 10;
-		this.add(1, Integer.valueOf(tempValue));
+		this.add(Integer.valueOf(tempValue));
 		
 		X = X / 10;
 		}
@@ -88,7 +88,7 @@ public class ReallyLongInt 	extends LinkedListPlus<Integer>
 	public String toString()
 	{
 		StringBuilder b = new StringBuilder();
-		Node curr = this.firstNode.prev;
+		Node curr = firstNode.prev;
 		int i = 0;
 		while (i < this.getLength())
 		{
@@ -107,92 +107,93 @@ public class ReallyLongInt 	extends LinkedListPlus<Integer>
 	// Return new ReallyLongInt which is sum of current and argument
 	public ReallyLongInt add(ReallyLongInt rightOp)
 	{
+		
 		int l1Length = this.numberOfEntries;
 		int l2Length = rightOp.numberOfEntries;
 		ReallyLongInt sum = new ReallyLongInt();
-		boolean biggerNum = false; // false means the first number is bigger
+		
+		int digit = 0;
+		int remainder = 0;
+		int amount = 0;
+		int maxVal = 0;
 		
 		
 		
 		
 		if(l1Length > l2Length)
 		{
-			while(l1Length < l2Length)
-			{
-				this.add(1,0);
-				l1Length++;
-			}
+			amount = l1Length - l2Length;
+			maxVal = l1Length;
 			
-		}
-		else
-		{
-			biggerNum = true;
-			while(l2Length < l1Length)
+			while(amount > 0)
 			{
 				rightOp.add(1,0);
-				l2Length++;
+				amount--;
 			}
+		}
+		if(l1Length < l2Length)
+		{
+			amount = l2Length - l1Length;
+			maxVal = l2Length;
 			
-		} //sets up ReallyBigInts to have the same amount of digits
+			while(amount > 0)
+			{
+				this.add(1,0);
+				amount--;
+			}
+		}
+		
+		
+		Node temp1 = this.firstNode.prev;
+		Node temp2 = rightOp.firstNode.prev;
 		
 		
 		
-		Node Node1 = this.firstNode.prev;
-		Node Node2 = rightOp.firstNode.prev;
-		Integer tempValue = null;
-		Integer remainder = 0;
-		
-		
-		
-		//special case - first two values, wont ever have a chance of having a remainder
-		tempValue = Node1.data + Node2.data;
+			for(int i = 1; i <= maxVal ; i++)
+			{
 				
-				if(tempValue > 10)
+				digit = temp2.data + temp2.data + remainder;
+				
+				if(digit == 10)
 				{
-					tempValue = tempValue % 10;
-					remainder = remainder((Integer)Node1.data, (Integer) Node2.data);
+					digit = 0;
+					remainder = 0;
+					sum.add(i, digit);
+				}
+				else if(digit > 10)
+				{
+				digit = digit % 10;
+				remainder = 10;
+				sum.add(i, digit);
+				}
+				else
+				{
+					sum.add(i, digit);
+					remainder = 0;
+					
 				}
 				
-				sum.add(tempValue);
-		
-		for(int i = 1; i < l1Length; i++)
-		{
-		Node1 = Node1.prev;
-		Node2 = Node2.prev;
-		
-		tempValue = Node1.data + Node2.data + remainder;
-		
-		if(tempValue > 9)
-		{
-			tempValue = tempValue % 9;
-			remainder = remainder((Integer)Node1.data, (Integer) Node2.data);
-		}
-		
-			sum.add(tempValue);	
-		}
-		
-		
-			sum.add(remainder);
-		
-		
-		Node sumLastNode = sum.firstNode.prev;
-		if(sumLastNode.data == 0)
-		{
-			while(sumLastNode.data == 0)
-			{
-				sum.rightShift(1);
-				sumLastNode = sum.firstNode.prev;
+				if(remainder != 0)
+				{
+					sum.add(1);
+				}
+				
+				temp1 = temp1.next;
+				temp2 = temp2.next;
+				
+				
 			}
 			
-		}
-		return sum;
-		}
+			
+			
+			
+			
 		
-	public Integer remainder(Integer num1, Integer num2) //if digit in adding goes above 9 to deal with single digits
-	{
-		return (num1 + num2) % 10;
+		return sum;
 		
 	}
+		
+	
 	
 	// Return new ReallyLongInt which is difference of current and argument
 	public ReallyLongInt subtract(ReallyLongInt rightOp)

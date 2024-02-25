@@ -43,6 +43,7 @@ public class RLITest
 		// Testing add method.
 		ReallyLongInt R3 = R1.add(R2);
 		System.out.println(R1 + " + " + R2 + " = " + R3);
+		System.out.println(R1 + " + " + R2 + " = ");
 		R1 = new ReallyLongInt("1");
 		R2 = new ReallyLongInt("9999999999999999999999999999");
 		R3 = R1.add(R2);
@@ -50,6 +51,11 @@ public class RLITest
 		System.out.println(R1 + " + " + R2 + " = " + R3);
 		System.out.println(R2 + " + " + R1 + " = " + R4);
 		System.out.println();
+		
+		ReallyLongInt R7 = new ReallyLongInt("900");
+		ReallyLongInt R8 = new ReallyLongInt("20");
+		ReallyLongInt R9 = R7.add(R8);
+		System.out.println(R7 + "+" + R8 + "=" + R9);
 		
 //		
 //		// Testing subtract method

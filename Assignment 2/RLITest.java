@@ -41,21 +41,21 @@ public class RLITest
 		System.out.println();
 		
 		// Testing add method.
-		ReallyLongInt R3 = R1.add(R2);
-		System.out.println(R1 + " + " + R2 + " = " + R3);
-		System.out.println(R1 + " + " + R2 + " = ");
-		R1 = new ReallyLongInt("1");
-		R2 = new ReallyLongInt("9999999999999999999999999999");
-		R3 = R1.add(R2);
-		ReallyLongInt R4 = R2.add(R1);
-		System.out.println(R1 + " + " + R2 + " = " + R3);
-		System.out.println(R2 + " + " + R1 + " = " + R4);
-		System.out.println();
+//		ReallyLongInt R3 = R1.add(R2);
+//		System.out.println(R1 + " + " + R2 + " = " + R3);
+//		System.out.println(R1 + " + " + R2 + " = ");
+//		R1 = new ReallyLongInt("1");
+//		R2 = new ReallyLongInt("9999999999999999999999999999");
+//		R3 = R1.add(R2);
+//		ReallyLongInt R4 = R2.add(R1);
+//		System.out.println(R1 + " + " + R2 + " = " + R3);
+//		System.out.println(R2 + " + " + R1 + " = " + R4);
+//		System.out.println();
 		
 		ReallyLongInt R7 = new ReallyLongInt("900");
 		ReallyLongInt R8 = new ReallyLongInt("20");
 		ReallyLongInt R9 = R7.add(R8);
-		System.out.println(R7 + "+" + R8 + "=" + R9);
+		System.out.println(R7 + "+" + R8 + "="  + R9);
 		
 //		
 //		// Testing subtract method
@@ -97,26 +97,26 @@ public class RLITest
 //		System.out.println("Copy of " + R4.toString() + " = " + R5.toString());
 //		System.out.println();
 //		
-//		// Testing compareTo
-//		ReallyLongInt [] C = new ReallyLongInt[5];
-//		C[0] = new ReallyLongInt("844444444444444");
-//		C[1] = new ReallyLongInt("744444444444444");
-//		C[2] = new ReallyLongInt("844444445444444");
-//		C[3] = new ReallyLongInt("9444");
-//		C[4] = new ReallyLongInt("744444444444445");
-//		for (int i = 0; i < C.length; i++)
-//		{
-//			for (int j = 0; j < C.length; j++)
-//			{
-//				int ans = C[i].compareTo(C[j]);
-//				if (ans < 0)
-//					System.out.println(C[i] + " < " + C[j]);
-//				else if (ans > 0)
-//					System.out.println(C[i] + " > " + C[j]);
-//				else
-//					System.out.println(C[i] + " == " + C[j]);
-//			}
-//		}
+		// Testing compareTo
+		ReallyLongInt [] C = new ReallyLongInt[5];
+		C[0] = new ReallyLongInt("844444444444444");
+		C[1] = new ReallyLongInt("744444444444444");
+		C[2] = new ReallyLongInt("844444445444444");
+		C[3] = new ReallyLongInt("9444");
+		C[4] = new ReallyLongInt("744444444444445");
+		for (int i = 0; i < C.length; i++)
+		{
+			for (int j = 0; j < C.length; j++)
+			{
+				int ans = C[i].compareTo(C[j]);
+				if (ans < 0)
+					System.out.println(C[i] + " < " + C[j]);
+				else if (ans > 0)
+					System.out.println(C[i] + " > " + C[j]);
+				else
+					System.out.println(C[i] + " == " + C[j]);
+			}
+		}
 //		System.out.println();
 //		Arrays.sort(C);
 //		System.out.println("Here is the sorted array: ");
@@ -124,16 +124,16 @@ public class RLITest
 //			System.out.println(R);
 //		System.out.println();
 //
-//		// Testing equals
-//		R1 = new ReallyLongInt("12345678987654321");
-//		R2 = new ReallyLongInt("12345678987654321");
-//		R3 = new ReallyLongInt("12345678907654321");
-//		if (R1.equals(R2))
-//			System.out.println(R1 + " equals " + R2);
-//		if (!R1.equals(R3))
-//			System.out.println(R1 + " does not equal " + R3);
-//		System.out.println();
-//
+		// Testing equals
+		R1 = new ReallyLongInt("12345678987654321");
+		R2 = new ReallyLongInt("12345678987654321");
+		R8 = new ReallyLongInt("12345678907654321");
+		if (R1.equals(R2))
+			System.out.println(R1 + " equals " + R2);
+		if (!R1.equals(R8))
+			System.out.println(R1 + " does not equal " + R8);
+		System.out.println();
+
 //		// Testing multiply
 //		R1 = new ReallyLongInt("12345");
 //		R2 = new ReallyLongInt("100");

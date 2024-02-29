@@ -118,38 +118,42 @@ public class ReallyLongInt 	extends LinkedListPlus<Integer>
 		int maxVal = 0;
 		
 		
+		//this code was supposed to add leading 0's to the start of the number with the lesser digits, to make it so they both have
+		//the same digits when adding. It kept creating null pointer exceptions that I could not fix. 
+		
+//		if(l1Length > l2Length)
+//		{
+//			amount = l1Length - l2Length;
+//			maxVal = l1Length;
+//			
+//			while(amount > 0)
+//			{
+//				rightOp.add(1,0);
+//				amount--;
+//			}
+//		}
+//		if(l1Length < l2Length)
+//		{
+//			amount = l2Length - l1Length;
+//			maxVal = l2Length;
+//			
+//			while(amount > 0)
+//			{
+//				this.add(1,0);
+//				amount--;
+//			}
+//		}
 		
 		
-		if(l1Length > l2Length)
+		
+		Node temp1 = this.firstNode;
+		Node temp2 = rightOp.firstNode;
+		
+		
+		//code for adding. only works with two ReallyBigInts with the same value of digits 
+		
 		{
-			amount = l1Length - l2Length;
-			maxVal = l1Length;
-			
-			while(amount > 0)
-			{
-				rightOp.add(1,0);
-				amount--;
-			}
-		}
-		if(l1Length < l2Length)
-		{
-			amount = l2Length - l1Length;
-			maxVal = l2Length;
-			
-			while(amount > 0)
-			{
-				this.add(1,0);
-				amount--;
-			}
-		}
-		
-		
-		Node temp1 = this.firstNode.prev;
-		Node temp2 = rightOp.firstNode.prev;
-		
-		
-		
-			for(int i = 1; i <= maxVal ; i++)
+			for(int i = 1; i <= l1Length ; i++)
 			{
 				
 				digit = temp2.data + temp2.data + remainder;
@@ -185,7 +189,7 @@ public class ReallyLongInt 	extends LinkedListPlus<Integer>
 			}
 			
 			
-			
+		}
 			
 			
 		
@@ -213,6 +217,37 @@ public class ReallyLongInt 	extends LinkedListPlus<Integer>
 	// Return 1 if current ReallyLongInt is greater than rOp
 	public int compareTo(ReallyLongInt rOp)
 	{
+		Node temp1 = this.firstNode.prev;
+		Node temp2 = rOp.firstNode.prev;
+		
+		if(this.numberOfEntries > rOp.numberOfEntries)
+		{
+			return 1;
+		}
+		else if(this.numberOfEntries < rOp.numberOfEntries)
+		{
+			return -1;
+		}
+		
+		else
+		{
+			for(int i = 0; i < this.numberOfEntries; i++)
+			{
+				if(temp1.data > temp2.data)
+				{
+					return 1;
+				}
+				else if(temp2.data > temp1.data)
+				{
+					return -1;
+				}
+				else
+				{}
+				temp1 = temp1.prev;
+				temp2 = temp2.prev;
+			}
+			return 0;
+		}
 	}
 
 	// Is current ReallyLongInt equal to rightOp?  Note that the argument
@@ -221,5 +256,15 @@ public class ReallyLongInt 	extends LinkedListPlus<Integer>
 	// Object class.
 	public boolean equals(Object rightOp)
 	{
+		ReallyLongInt rOp = (ReallyLongInt) rightOp;
+		
+		if(this.compareTo(rOp) == 0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 }
